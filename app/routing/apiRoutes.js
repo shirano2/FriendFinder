@@ -2,7 +2,7 @@ const express=require("express");
 const router = express.Router();
 const friendArray=require("../data/friends.js");
 
-router.use(function timeLog(req, res,next) {
+router.use(function timeLog(req, res, next) {
     next(); 
 });
 
