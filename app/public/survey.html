@@ -118,7 +118,7 @@ $(function(){
             photo:$("#photo").val().trim(),
             scores:selected
         };
-        $.post("/api/friends",newFriend).then(function(data){
+        $.post("/api/friends",newFriend).then(function(data) {
             $("#friend-name").text(data.name);
             $("#friend-img").attr("src",data.photo);
             $('#myModal').modal('show');

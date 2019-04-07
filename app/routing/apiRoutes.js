@@ -6,11 +6,11 @@ router.use(function timeLog(req, res, next) {
     next(); 
 });
 
-router.get("/",function(req,res){
+router.get("/",function(req,res) {
     res.json(friendArray);
 });
 
-router.post("/",function(req,res){
+router.post("/",function(req,res) {
     var newFriend=req.body;
     var matchFriend;
     var match;

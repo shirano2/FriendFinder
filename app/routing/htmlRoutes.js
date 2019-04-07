@@ -6,7 +6,7 @@ router.use(function timeLog(req, res, next) {
     next(); 
 });
 
-router.get("/",function(req,res){
+router.get("/",function(req,res) {
     res.sendFile(path.join(__dirname,"../public/survey.html"));
 });
 
