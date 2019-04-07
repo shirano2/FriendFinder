@@ -14,16 +14,16 @@ router.post("/",function(req,res) {
     var newFriend=req.body;
     var matchFriend;
     var match;
-    var score=0;
+    var totalDifference=0;
     for(var i=0;i<friendArray.length;i++) {
         for(var j=0;j<friendArray[i].scores.length;j++) {
-            score=score+Math.abs(friendArray[i].scores[j]-newFriend.scores[j]);
+            totalDifference=totalDifference+Math.abs(friendArray[i].scores[j]-newFriend.scores[j]);
         }
-        if(match==undefined || score<match) {
-            match=score;
+        if(match==undefined || totalDifference<match) {
+            match=totalDifference;
             matchFriend=friendArray[i];
         }
-        score=0;
+        totalDifference=0;
     }
     friendArray.push(newFriend);
     res.json(matchFriend);

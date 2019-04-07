@@ -7,12 +7,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); 
 
 app.use(express.static('public'));
-app.use("/survey",require('./app/routing/htmlRoutes.js'));
 app.use("/api/friends",require('./app/routing/apiRoutes.js'));
-
-app.get("/*",function(req,res) {
-    res.sendFile(path.join(__dirname,"app/public/home.html"));
-});
+app.use("/",require('./app/routing/htmlRoutes.js'));
 
 app.listen(PORT, function() {
     console.log("I can hear you... ");
