@@ -17,12 +17,3 @@ app.get("/*",function(req,res) {
 app.listen(PORT, function(){
     console.log("I can hear you... ");
 });
-
-
-
-
-
-
-
-
-
