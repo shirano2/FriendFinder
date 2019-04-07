@@ -11,20 +11,34 @@
     <title>Survey</title>
 </head>
 <style>
-*,
-*:before,
-*:after {
+*, *:before, *:after {
    box-sizing: border-box;
 }
+
 .wrapper {
-    /* padding: 20px 20px 20px 20px; */
     background-color:oldlace;
     padding:20px;
 }
-#friend-img {
-    width:100%;
-    height:700px;
+
+h2 {
+    color: rgb(109, 224, 130); 
+    font-family: 'Rouge Script', cursive;
+    font-size: 90px; 
+    font-weight: bold; 
+    line-height: 48px; 
+    margin: 0 0 50px;  
+    text-shadow: 1px 1px 2px #082b34;
 }
+
+h4 { color: #4c32df; 
+    font-family: 'Julius Sans One', sans-serif; 
+    font-size: 22px; 
+    font-weight: bold; 
+    line-height: 32px; 
+    margin: 0 0 10px; 
+    text-shadow: 1px 1px 1px #082b34; 
+}
+
 input, select {
   border-radius: 5px;
   font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -33,6 +47,15 @@ input, select {
   width:250px;
   height:30px;
 }
+
+input:focus {
+    background-color:#D8ECFF;
+}
+
+select:focus {
+    background-color:rgb(245, 230, 236);
+}
+
 label {
   color: #395870;
   font-family: 'Carme', sans-serif;
@@ -41,12 +64,7 @@ label {
   font-size:20px;
   margin-bottom: 2px;
 }
-input:focus {
-    background-color:#D8ECFF;
-}
-select:focus {
-    background-color:rgb(245, 230, 236);
-}
+
 #submit {
   background-color: #9e76e8;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #9e76e8), color-stop(50%, #7038e0), color-stop(50%, #6021de), color-stop(100%, #6224de));
@@ -65,6 +83,7 @@ select:focus {
   height: 50px;
   -webkit-background-clip: padding-box; 
 }
+
 #submit:hover {
     background-color: #8d69cf;
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #8d69cf), color-stop(50%, #6332c7), color-stop(50%, #551dc4), color-stop(100%, #561fc4));
@@ -76,44 +95,19 @@ select:focus {
     -webkit-background-clip: padding-box;
     cursor: pointer; 
 }
-h2{
-    color: rgb(109, 224, 130); 
-    font-family: 'Rouge Script', cursive;
-    font-size: 90px; 
-    font-weight: bold; 
-    line-height: 48px; 
-    margin: 0 0 50px;  
-    text-shadow: 1px 1px 2px #082b34;
-}
 
-h4 { color: #4c32df; 
-    font-family: 'Julius Sans One', sans-serif; 
-    font-size: 22px; 
-    font-weight: bold; 
-    line-height: 32px; 
-    margin: 0 0 10px; 
-    text-shadow: 1px 1px 1px #082b34; 
+#friend-img {
+    width:100%;
+    height:700px;
 }
 </style>
 <script>
 $(function(){
-    // $('#myModal').on('show.bs.modal', function (e) {
-    //     e.preventDefault(); 
-    //     $('#myModal').modal('show');
-    // });
-//     $('#myModal').on('shown.bs.modal', function (e) {
-//         e.preventDefault(); 
-//   //$("#submit").trigger('click');
-//     })
-
     $("#submit").on("click",function(e){
         e.preventDefault();
         for(var i=0;i<$(".validation").length;i++) {
             if($(".validation").eq(i).val()=="") {
-                console.log("여기");
-                console.log($(this));
                 return $(".validation").eq(i).focus();
-                //$('#myModal').modal('hide');
             }
         }
         var selected=[];
@@ -126,7 +120,6 @@ $(function(){
             scores:selected
         };
         $.post("/api/friends",newFriend).then(function(data){
-            console.log(data);
             $("#friend-name").text(data.name);
             $("#friend-img").attr("src",data.photo);
             $('#myModal').modal('show');
@@ -134,7 +127,6 @@ $(function(){
         
     });
 })
-
 </script>
 <body>
     <div class="wrapper">
@@ -172,11 +164,11 @@ $(function(){
                 <label for="qes3">Are you vegeterian?</label><br>
                 <select id="qes3" class="validation">
                     <option value=""></option>
-                    <option value="1">1 (Vegan)</option>
+                    <option value="1">1 (Yes, I'm Vegan)</option>
                     <option value="2">2 (Lacto)</option>
                     <option value="3">3 (Pesco) </option>
                     <option value="4">4 (Semi)</option>
-                    <option value="5">5 (I like meat)</option>
+                    <option value="5">5 (No, I like meat)</option>
                 </select><br><br>
                 <h4>Question 4</h4>
                 <label for="qes4">Are you good at coding?</label><br>
