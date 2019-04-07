@@ -2,7 +2,7 @@
 
 This app is simple. 
 
-If you find a friend who is the best match of you. 
+This app makes you find a friend who is the best match of you. 
 
 Before that, you have to input your information in the form.
 
