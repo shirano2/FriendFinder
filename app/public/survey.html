@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Carme|Julius+Sans+One|Rouge+Script" rel="stylesheet">
+    <title>Survey</title>
+</head>
+<style>
+*,
+*:before,
+*:after {
+   box-sizing: border-box;
+}
+.wrapper {
+    /* padding: 20px 20px 20px 20px; */
+    background-color:oldlace;
+    padding:20px;
+}
+#friend-img {
+    width:100%;
+    height:700px;
+}
+input, select {
+  border-radius: 5px;
+  font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  margin-bottom:10px;
+  width:250px;
+  height:30px;
+}
+label {
+  color: #395870;
+  font-family: 'Carme', sans-serif;
+  /* display: block; */
+  font-weight: bold;
+  font-size:20px;
+  margin-bottom: 2px;
+}
+input:focus {
+    background-color:#D8ECFF;
+}
+select:focus {
+    background-color:rgb(245, 230, 236);
+}
+#submit {
+  background-color: #9e76e8;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #9e76e8), color-stop(50%, #7038e0), color-stop(50%, #6021de), color-stop(100%, #6224de));
+  background-image: -webkit-linear-gradient(top, #9e76e8 0%, #7038e0 50%, #6021de 50%, #6224de 100%);
+  background-image: -moz-linear-gradient(top, #9e76e8 0%, #7038e0 50%, #6021de 50%, #6224de 100%);
+  background-image: -ms-linear-gradient(top, #9e76e8 0%, #7038e0 50%, #6021de 50%, #6224de 100%);
+  background-image: -o-linear-gradient(top, #9e76e8 0%, #7038e0 50%, #6021de 50%, #6224de 100%);
+  background-image: linear-gradient(top, #9e76e8 0%, #7038e0 50%, #6021de 50%, #6224de 100%);
+  border-radius: 3px;
+  color: #fff;
+  font: bold 28px 'Julius Sans One', sans-serif;
+  padding: 10px 0 12px 0;
+  text-align: center;
+  text-shadow: 0 -1px 1px #473569;
+  width: 50%;
+  height: 50px;
+  -webkit-background-clip: padding-box; 
+}
+#submit:hover {
+    background-color: #8d69cf;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #8d69cf), color-stop(50%, #6332c7), color-stop(50%, #551dc4), color-stop(100%, #561fc4));
+    background-image: -webkit-linear-gradient(top, #8d69cf 0%, #6332c7 50%, #551dc4 50%, #561fc4 100%);
+    background-image: -moz-linear-gradient(top, #8d69cf 0%, #6332c7 50%, #551dc4 50%, #561fc4 100%);
+    background-image: -ms-linear-gradient(top, #8d69cf 0%, #6332c7 50%, #551dc4 50%, #561fc4 100%);
+    background-image: -o-linear-gradient(top, #8d69cf 0%, #6332c7 50%, #551dc4 50%, #561fc4 100%);
+    background-image: linear-gradient(top, #8d69cf 0%, #6332c7 50%, #551dc4 50%, #561fc4 100%);
+    -webkit-background-clip: padding-box;
+    cursor: pointer; 
+}
+h2{
+    color: rgb(109, 224, 130); 
+    font-family: 'Rouge Script', cursive;
+    font-size: 90px; 
+    font-weight: bold; 
+    line-height: 48px; 
+    margin: 0 0 50px;  
+    text-shadow: 1px 1px 2px #082b34;
+}
+
+h4 { color: #4c32df; 
+    font-family: 'Julius Sans One', sans-serif; 
+    font-size: 22px; 
+    font-weight: bold; 
+    line-height: 32px; 
+    margin: 0 0 10px; 
+    text-shadow: 1px 1px 1px #082b34; 
+}
+</style>
+<script>
+$(function(){
+    // $('#myModal').on('show.bs.modal', function (e) {
+    //     e.preventDefault(); 
+    //     $('#myModal').modal('show');
+    // });
+//     $('#myModal').on('shown.bs.modal', function (e) {
+//         e.preventDefault(); 
+//   //$("#submit").trigger('click');
+//     })
+
+    $("#submit").on("click",function(e){
+        e.preventDefault();
+        for(var i=0;i<$(".validation").length;i++) {
+            if($(".validation").eq(i).val()=="") {
+                console.log("여기");
+                console.log($(this));
+                return $(".validation").eq(i).focus();
+                //$('#myModal').modal('hide');
+            }
+        }
+        var selected=[];
+        for(var i=0;i<$("select").length;i++) {
+            selected.push(parseInt($("#qes"+(i+1)).val()));
+        }
+        var newFriend={
+            name:$("#name").val().trim(),
+            photo:$("#photo").val().trim(),
+            scores:selected
+        };
+        $.post("/api/friends",newFriend).then(function(data){
+            console.log(data);
+            $("#friend-name").text(data.name);
+            $("#friend-img").attr("src",data.photo);
+            $('#myModal').modal('show');
+        });
+        
+    });
+})
+
+</script>
+<body>
+    <div class="wrapper">
+        <section class="container">
+            <form>
+                <h2>Survey Questions</h2>
+                <hr>
+                <h4>About You</h4>
+                <label for="name">Name</label><br>
+                <input type="test" id="name" class="validation"><br>
+                <label for="photo">Link to Photo Images</label><br>
+                <input type="test" id="photo" class="validation">
+                <hr>
+                <h4>Question 1</h4>
+                <label for="qes1">Are you hungry?</label><br>
+                <select id="qes1" class="validation">
+                    <option value=""></option>
+                    <option value="1">1 (I want to eat you)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (I'm full)</option>
+                </select><br><br>
+                <h4>Question 2</h4>
+                <label for="qes2">Are you happy?</label><br>
+                <select id="qes2" class="validation">
+                    <option value=""></option>
+                    <option value="1">1 (I'm always happy)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (I wanna die)</option>
+                </select><br><br>
+                <h4>Question 3</h4>
+                <label for="qes3">Are you vegeterian?</label><br>
+                <select id="qes3" class="validation">
+                    <option value=""></option>
+                    <option value="1">1 (Vegan)</option>
+                    <option value="2">2 (Lacto)</option>
+                    <option value="3">3 (Pesco) </option>
+                    <option value="4">4 (Semi)</option>
+                    <option value="5">5 (I like meat)</option>
+                </select><br><br>
+                <h4>Question 4</h4>
+                <label for="qes4">Are you good at coding?</label><br>
+                <select id="qes4" class="validation">
+                    <option value=""></option>
+                    <option value="1">1 (Yes, I don't need anyone to help me)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (No, I'm dumb)</option>
+                </select><br><br>
+                <h4>Question 5</h4>
+                <label for="qes5">Can you speak Korean?</label><br>
+                <select id="qes5" class="validation">
+                    <option value=""></option>
+                    <option value="1">1 (Yes, I like GangNam Style)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (No, I hate Kimchi)</option>
+                </select><br><br>
+                <h4>Question 6</h4>
+                <label for="qes6">Do you like Austin?</label><br>
+                <select id="qes6" class="validation">
+                    <option value=""></option>
+                    <option value="1">1 (I want to spend whole life here)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (I want to leave here)</option>
+                </select><br><br>
+                <h4>Question 7</h4>
+                <label for="qes7">Hamburger, Pizza, Which one do you like more?</label><br>
+                <select id="qes7" class="validation">
+                    <option value=""></option>
+                    <option value="1">1 (Always Hamburger)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (Always Pizza)</option>
+                </select><br><br>
+                <h4>Question 8</h4>
+                <label for="qes8">Which of Marvel character do you like the most?</label><br>
+                <select id="qes8" class="validation">
+                    <option value=""></option>
+                    <option value="1">1 (Spider-man)</option>
+                    <option value="2">2 (torr)</option>
+                    <option value="3">3 (Dr. Strange)</option>
+                    <option value="4">4 (Iron-man)</option>
+                    <option value="5">5 (I'm sorry, I like DC more)</option>
+                </select><br><br>
+                <h4>Question 9</h4>
+                <label for="qes9">Which of alchoholic drink do you like the most?</label><br>
+                <select id="qes9" class="validation">
+                    <option value=""></option>
+                    <option value="1">1 (Beer~~!!!!)</option>
+                    <option value="2">2 (Cocktail~!)</option>
+                    <option value="3">3 (Wine)</option>
+                    <option value="4">4 (liquor?)</option>
+                    <option value="5">5 (I can't drink alchohol)</option>
+                </select><br><br>
+                <h4>Question 10</h4>
+                <label for="qes10">Which age do you want to marry?</label><br>
+                <select id="qes10" class="validation">
+                    <option value=""></option>
+                    <option value="1">10-19 (Good job)</option>
+                    <option value="2">20-29 (Not bad)</option>
+                    <option value="3">30-39 (That's okay)</option>
+                    <option value="4">40-49 (I recommend being single)</option>
+                    <option value="5">over 50 (What?)</option>
+                </select><br><br>
+                <input id="submit" class="btn btn-primary btn-block" type="submit" value="submit">
+            </form>
+        </section>
+              
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLabel">Best Match</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h2 id="friend-name"></h2>
+                        <img id="friend-img" src="" alt="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
