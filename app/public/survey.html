@@ -102,22 +102,26 @@ label {
 </style>
 <script>
 $(function(){
+    /*when click the submit button */
     $("#submit").on("click",function(e){
         e.preventDefault();
+        /* for validation */
         for(var i=0;i<$(".validation").length;i++) {
             if($(".validation").eq(i).val()=="") {
                 return $(".validation").eq(i).focus();
             }
         }
+        /* getting data from form */
         var selected=[];
         for(var i=0;i<$("select").length;i++) {
-            selected.push(parseInt($("#qes"+(i+1)).val()));
+            selected.push($("#qes"+(i+1)).val());
         }
         var newFriend={
             name:$("#name").val().trim(),
             photo:$("#photo").val().trim(),
             scores:selected
         };
+        /* send request and getting data from server */
         $.post("/api/friends",newFriend).then(function(data) {
             $("#friend-name").text(data.name);
             $("#friend-img").attr("src",data.photo);
@@ -128,6 +132,7 @@ $(function(){
 </script>
 <body>
     <div class="wrapper">
+        <!-- submit form -->
         <section class="container">
             <form>
                 <h2>Survey Questions</h2>
@@ -241,7 +246,7 @@ $(function(){
                 <input id="submit" class="btn btn-primary btn-block" type="submit" value="submit">
             </form>
         </section>
-              
+        <!-- modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
