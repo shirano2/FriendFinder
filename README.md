@@ -17,7 +17,7 @@ https://friend-finder-60463.herokuapp.com/
 
 * HTML5
 * CSS3
-* jQuery
+* JQuery
 * Javascript
 * Node.js
 * express
