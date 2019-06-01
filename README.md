@@ -19,8 +19,7 @@ https://friend-finder-60463.herokuapp.com/
 * CSS3
 * JQuery
 * Javascript
-* Node.js
-* express
+* Node.js (Express)
 
 
 ### Survey Page 
