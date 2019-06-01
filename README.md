@@ -8,6 +8,7 @@ Before that, you have to answer 10 question of survey.
 
 I hope you can find a good friend !!
 
+
 ## Site
 https://friend-finder-60463.herokuapp.com/
 
@@ -38,7 +39,7 @@ Total Difference: 2 + 1 + 2 = 5
 
 The closest match will be the user with the least amount of difference.
 
-#### I love Redvelvet
+#### I love Redvelvet, you too?
 
 ### Creator
 This is made by Minseok Choi (https://github.com/shirano2)
