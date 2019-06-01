@@ -4,7 +4,7 @@ This app is simple.
 
 This app makes you find a friend who is the best match of you. 
 
-Before that, you have to input your information in the form.
+Before that, you have to answer 10 question of survey.
 
 I hope you can find a good friend !!
 
@@ -38,6 +38,7 @@ Total Difference: 2 + 1 + 2 = 5
 
 The closest match will be the user with the least amount of difference.
 
+#### I love Redvelvet
 
 ### Creator
 This is made by Minseok Choi (https://github.com/shirano2)
