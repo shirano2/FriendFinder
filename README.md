@@ -41,7 +41,7 @@ Total Difference: 2 + 1 + 2 = 5
 
 The closest match will be the user with the least amount of difference.
 
-#### I love Redvelvet, you too?
+#### I love Redvelvet. How about you?
 
 ### Creator
 This is made by Minseok Choi (https://github.com/shirano2)
